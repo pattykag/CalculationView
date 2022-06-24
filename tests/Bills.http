@@ -1,0 +1,9 @@
+### POST REQUEST
+POST http://localhost:4004/api/Bills
+Content-Type: application/json
+
+{
+    "ID": 1,
+    "product_ID": 1,
+    "client_ID": 1
+}

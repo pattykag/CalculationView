@@ -1,0 +1,8 @@
+### POST REQUEST
+POST http://localhost:4004/api/Products
+Content-Type: application/json
+
+{
+    "ID": 1,
+    "productName": "Desodorante"
+}

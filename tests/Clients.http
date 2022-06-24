@@ -1,0 +1,10 @@
+### POST REQUEST
+POST http://localhost:4004/api/Clients
+Content-Type: application/json
+
+{
+    "ID": 1,
+    "dni": "345522343",
+    "name": "Sergio",
+    "lastname": "Ortega"
+}

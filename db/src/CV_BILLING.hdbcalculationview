@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_BILLING" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="CV_BILLING"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="BILLING_BILLS">
+    <resourceUri>BILLING_BILLS</resourceUri>
+  </DataSource>
+  <DataSource id="BILLING_CLIENTS">
+    <resourceUri>BILLING_CLIENTS</resourceUri>
+  </DataSource>
+  <DataSource id="BILLING_PRODUCTS">
+    <resourceUri>BILLING_PRODUCTS</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_1" cardinality="CN_N" joinType="inner" multiJoinNode="Join_1" multiJoinCentralTable="BILLING_BILLS" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="DNI"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="LASTNAME"/>
+      <viewAttribute id="PRODUCT_ID"/>
+      <viewAttribute hidden="true" id="JOIN$CLIENT_ID$ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="BILLING_BILLS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_ID" source="PRODUCT_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CLIENT_ID$ID" source="CLIENT_ID"/>
+    </input>
+    <input node="BILLING_CLIENTS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="DNI" source="DNI"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LASTNAME" source="LASTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CLIENT_ID$ID" source="ID"/>
+    </input>
+    <joinAttribute name="JOIN$CLIENT_ID$ID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_2" cardinality="CN_N" joinType="inner" multiJoinNode="Join_1" multiJoinCentralTable="BILLING_BILLS" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="DNI"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="LASTNAME"/>
+      <viewAttribute id="PRODUCT_ID"/>
+      <viewAttribute id="PRODUCTNAME"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Join_1_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DNI" source="DNI"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LASTNAME" source="LASTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_ID" source="PRODUCT_ID"/>
+    </input>
+    <input node="BILLING_PRODUCTS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTNAME" source="PRODUCTNAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_ID" source="ID"/>
+    </input>
+    <joinAttribute name="PRODUCT_ID"/>
+  </calculationView>
+</calculationViews>
+
+<logicalModel id="Join_1_2">
+  <attributes>
+    <attribute id="ID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ID"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="ID"/>
+    </attribute>
+    <attribute id="DNI" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DNI"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="DNI"/>
+    </attribute>
+    <attribute id="NAME" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NAME"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="NAME"/>
+    </attribute>
+    <attribute id="LASTNAME" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LASTNAME"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="LASTNAME"/>
+    </attribute>
+    <attribute id="PRODUCT_ID" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT_ID"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="PRODUCT_ID"/>
+    </attribute>
+    <attribute id="PRODUCTNAME" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCTNAME"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="PRODUCTNAME"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="118" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+    
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="66" y="218"/>
+      <rectangleSize height="30" width="212"/>
+    </shape>
+    <shape modelObjectName="BILLING_PRODUCTS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="620" y="30"/>
+      <rectangleSize width="186"/>
+    </shape>
+  
+    <shape modelObjectName="BILLING_BILLS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="367" y="31"/>
+      <rectangleSize width="157"/>
+    </shape>
+    <shape modelObjectName="BILLING_CLIENTS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="74" y="30"/>
+      <rectangleSize width="170"/>
+    </shape></shapes>
+</layout>
+</Calculation:scenario>
